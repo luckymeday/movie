@@ -7,7 +7,7 @@ border:1px solid red
 }
 
 .body{
-  background-color:  #2c2828;
+  background-color:  #1a1717 !important;
 }
 
 .navbar-main {
@@ -17,7 +17,7 @@ border:1px solid red
 }
 
 .navbar{
-  background-color: #2c2828 !important;
+  background-color: #1a1717 !important;
   font-family: 'Times New Roman', Times, serif;
   font-size: 20px;
 }
@@ -48,20 +48,53 @@ background-color:#e6dfdf;
 } */
 
 .moviecard{
-border: 5px solid #928e8e;
+border: 5px solid #817a7a;
 border-radius: 20px;
-background-color: #d6d0d0;
+background-color: #1a1717;
 margin-bottom: 8%;
+/* width: 90%; */
+transition: 0.4s ease-in;
+position: relative;
+text-align: center;
 }
 
-.card-text{
+.moviecard:hover{
+transform: translate(-0%, 0%) scale(1.10);
+display: flex;
+justify-content: center;
+text-align: center;
+height: 100%;
+/* opacity: 20%; */
+}
+
+.detail-info{
+  padding-top:10%;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  height: 100%;
+  width: 100%;
+opacity: 85%;
+background-color: #494747;
+  color: white;
+ position: absolute;
+ top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card-letter{
   text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: #2c2828
+  color: #e6dfdf
 }
 
-.rating-bar{
-  color:black;
+/* .rating-bar{
+  background:black !important;
+} */
+
+.card-title{
+  font-weight:bolder
 }
 
 .small-letter{

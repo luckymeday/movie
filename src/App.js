@@ -34,7 +34,7 @@ export default function App() {
     // let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apikey}&language=en-US&page=1`
     let result = await fetch(url)
     let data = await result.json()
-    // console.log("api ok?", data)
+    console.log("api ok?", data)
     setMoviePage(data)
     setMovieList(data.results)
     setMovies(data.results) // data from results pass to movies >> setMovies
@@ -192,8 +192,8 @@ export default function App() {
         {/* <div class="col-md-8 mx-auto"> */}
         <div className="row main-zone border-red">
 
-          <div className="range col-md-5 col-sm-12 mx-md-auto my-5 container-fluid text-white rating-bar">
-            <InputRange
+          <div className="range col-md-5 col-sm-12 mx-md-auto my-5 container-fluid text-white">
+            <InputRange className="rating-bar"
               maxValue={10}
               minValue={0}
               value={ratingValue}
@@ -204,7 +204,7 @@ export default function App() {
           <div className="row list-area border-red">
             {movies.map(item => {
               return (
-                <MovieCard image={item.poster_path} title={item.original_title} releaseDate={item.release_date} rating={item.vote_average} />
+                <MovieCard image={item.poster_path} title={item.original_title} releaseDate={item.release_date} rating={item.vote_average} overview={item.overview} />
               )
             })}
             {/* <div className="text-white d-flex justify-content-center mt-5">
