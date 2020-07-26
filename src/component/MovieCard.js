@@ -7,11 +7,14 @@ export default function MovieCard(props) {
     let fullImg = `https://image.tmdb.org/t/p/original/${props.image}`
     return (
         <div className="col-md-3">
-            <div className="card">
+            <div className="card moviecard">
                 <img src={fullImg} className="card-img-top" alt="..." />
                 <div className="card-body">
-                    <h5 class="card-title">{props.title}</h5>
-                    <h6 class="card-text">{props.releaseDate}</h6>
+                    <h5 class="card-title card-text">{props.title}</h5>
+                    <div class="small-letter">
+                        <h6 class="card-text card-text">{props.releaseDate}</h6>
+                        <h6 class="card-text card-text">   ★ {props.rating}</h6>
+                    </div>
                 </div>
             </div>
         </div>

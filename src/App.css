@@ -1,9 +1,37 @@
-.border-red{
+/* .border-red{
 border:1px solid red
-}
+} */
 
 .container {
   width: 100% !important;
+}
+
+.body{
+  background-color:  #2c2828;
+}
+
+.navbar-main {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 40px;
+  font-style: italic;
+}
+
+.navbar{
+  background-color: #2c2828 !important;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+}
+
+.color-me{
+  color:#e6dfdf !important;
+}
+
+.color-me:hover{
+  color:#6b6464 !important;
+}
+
+.search-button{
+background-color:#e6dfdf;
 }
 
 .main-zone{
@@ -15,10 +43,100 @@ border:1px solid red
   width:80%;
 }
 
-.search-area{
+/* .search-area{
   width:80%;
+} */
+
+.moviecard{
+border: 5px solid #928e8e;
+border-radius: 20px;
+background-color: #d6d0d0;
+margin-bottom: 8%;
 }
 
-.upcoming-area{
+.card-text{
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: #2c2828
+}
+
+.rating-bar{
+  color:black;
+}
+
+.small-letter{
+  display: flex;
+  justify-content: space-around;
+}
+
+/* .upcoming-area{
   width:80%;
+} */
+
+.pagination {
+  text-align: center;
+}
+
+.pagination a {
+  color: #2c2828;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination>li.active>a {
+  background-color: #2c2828 !important;
+}
+
+.pagination > li > a:hover{
+  color: #e6dfdf;
+  background-color: #6b6464!important;
+}
+
+.bground{
+  background-color: #2c2828;
+}
+
+header {
+  position: relative;
+  background-color: black;
+  height: 75vh;
+  min-height: 25rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+header video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+header .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+@media (pointer: coarse) and (hover: none) {
+  header {
+    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+  }
+  header video {
+    display: none;
+  }
 }
