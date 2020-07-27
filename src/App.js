@@ -208,7 +208,7 @@ export default function App() {
             {movies.map(item => {
               console.log('item:', item)
               return (
-                <MovieCard image={item.poster_path} title={item.original_title} releaseDate={item.release_date} rating={item.vote_average} overview={item.overview} genre={item.genre_ids} genres={genres} />)
+                <MovieCard image={item.poster_path} title={item.original_title} releaseDate={item.release_date} rating={item.vote_average} overview={item.overview} genre={item.genre_ids} genres={genres} movieID={item.id} />)
             })}
           </div>
           <div className="pagination border-red">
