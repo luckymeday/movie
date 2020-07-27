@@ -80,7 +80,7 @@ height: 100%;
   height: 100%;
   width: 100%;
   /* opacity: 85%; */
-  background-color: #494747;
+  background-color: rgba(82, 67, 67, 0.719);
   color: white;
   position: absolute;
   top: 50%;
