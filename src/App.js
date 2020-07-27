@@ -204,7 +204,6 @@ export default function App() {
               onChange={(value) => yearSliderChange(value)} />
             <p className="text-center bars"> ✓ Year</p>
           </div>
-          
           <div className="row list-area border-red">
             {movies.map(item => {
               console.log('item:', item)
