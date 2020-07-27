@@ -41,18 +41,18 @@ export default function MovieCard(props) {
                     onHide={() => setShow(false)}
                     dialogClassName="modal-lg"
                     aria-labelledby="example-custom-modal-styling-title"
-                    style={{ borderRadius: "15px" }} >
-                    <Modal.Header closeButton style={{ backgroundColor: "lightgray" }}>
+                    style={{ borderRadius: "30px" }}>
+                    <Modal.Header closeButton style={{ backgroundColor: "gray" }}>
                         <Modal.Title style={{ color: "black" }} id="example-custom-modal-styling-title">
                             {props.title}
                         </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body style={{ backgroundColor: "gray" }}>
+                    <Modal.Body style={{ backgroundColor: "black" }}>
                         <Container className="video-modal">
                             <iframe src={youtubeLink} width="540" height="450" title="fx." ></iframe>
                         </Container>
                     </Modal.Body>
-                </Modal>
+                </Modal >
                 <div className="col-md-3">
                     <div className="card moviecard container" onMouseOver={showInfo} onMouseLeave={hideInfo} onClick={() => setShow(true)}>
                         <img src={fullImg} className="card-img-top" alt="..." />
@@ -75,13 +75,15 @@ export default function MovieCard(props) {
                     show={show}
                     onHide={() => setShow(false)}
                     dialogClassName="modal-lg"
-                    aria-labelledby="example-custom-modal-styling-title">
-                    <Modal.Header closeButton style={{ backgroundColor: "lightgray", }}>
+                    aria-labelledby="example-custom-modal-styling-title"
+                    style={{ borderRadius: "30px" }}
+                >
+                    <Modal.Header closeButton style={{ backgroundColor: "gray" }}>
                         <Modal.Title style={{ color: "black" }} id="example-custom-modal-styling-title">
                             {props.title}
                         </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body style={{ backgroundColor: "gray" }}>
+                    <Modal.Body style={{ backgroundColor: "black" }}>
                         <Container className="video-modal">
                             <iframe src={youtubeLink} width="540" height="450" title="fx." ></iframe>
                         </Container>

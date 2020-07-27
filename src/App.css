@@ -106,10 +106,10 @@ height: 100%;
   color: #e6dfdf
 }
 
-.modal-content {
-  height: 100% !important;
-  overflow:visible;
-}
+.video-modal{
+   width:80% !important; 
+   top:20% !important;
+ } 
 
 /* .rating-bar{
   background:black !important;
