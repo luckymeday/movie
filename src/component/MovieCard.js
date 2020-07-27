@@ -18,9 +18,9 @@ export default function MovieCard(props) {
     const hideInfo = () => {
         setIsHover(false)
     }
-    if (true) {
+    if (isHover) {
         return (
-           
+
             <div className="col-md-3">
                 <div className="card moviecard container" onMouseOver={showInfo} onMouseLeave={hideInfo}>
                     <img src={fullImg} className="card-img-top" alt="..." />
