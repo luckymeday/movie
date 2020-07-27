@@ -20,7 +20,14 @@ export default function MovieCard(props) {
     }
     if (true) {
         return (
-            <div>hahaha{props.overview}</div>
+            <div className="col-md-3">
+                <div className="card moviecard container" onMouseOver={showInfo} onMouseLeave={hideInfo}>
+                    <img src={fullImg} className="card-img-top" alt="..." />
+                    <div className="detail-info">
+                        <h5 className="card-title card-letter">{props.title}</h5>
+                    </div>
+                </div>
+            </div>
             // <div className="col-md-3">
             //     <div className="card moviecard container" onMouseOver={showInfo} onMouseLeave={hideInfo}>
             //         <img src={fullImg} className="card-img-top" alt="..." />
