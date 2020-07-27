@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 // how to send value of variable from here to parents? - by props
 export default function MovieCard(props) {
     let [isHover, setIsHover] = useState(false)
-    const [show, setShow] = useState(false)
+    // const [show, setShow] = useState(false)
     console.log('props.overview:', props.overview)
 
     // console.log("props ok?", props)
@@ -20,7 +20,7 @@ export default function MovieCard(props) {
     if (isHover) {
         return (
             <div className="col-md-3">
-                <div className="card moviecard container" onMouseOver={showInfo} onMouseLeave={hideInfo} onClick={() => setShow(true)}>
+                <div className="card moviecard container" onMouseOver={showInfo} onMouseLeave={hideInfo}>
                     <img src={fullImg} className="card-img-top" alt="..." />
                     <div className="detail-info"><h5 class="card-title card-letter">{props.title}</h5>
                         <div class="small-letter">
@@ -36,7 +36,7 @@ export default function MovieCard(props) {
     } else {
         return (
             <div className="col-md-3">
-                <div className="card moviecard" onMouseOver={showInfo} onMouseLeave={hideInfo} onClick={() => setShow(true)}>
+                <div className="card moviecard" onMouseOver={showInfo} onMouseLeave={hideInfo}>
                     <img src={fullImg} className="card-img-top" alt="..." />
                     <div className="card-body">
                         <h5 class="card-title card-letter">{props.title}</h5>

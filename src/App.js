@@ -19,12 +19,13 @@ const apikey = process.env.REACT_APP_APIKEY
 export default function App() {
   let [movies, setMovies] = useState([]); // for show on UI
   let [movieList, setMovieList] = useState([]); // for keep original list
-  let [upcomingList, setUpcomingList] = useState([])
-  let [searchList, setSearchList] = useState([])
-  let [moviePage, setMoviePage] = useState({});
+  // let [upcomingList, setUpcomingList] = useState([])
+  // let [searchList, setSearchList] = useState([])
+  // let [moviePage, setMoviePage] = useState({});
   let [activePage, setActivePage] = useState(1);
   // let [searchTerm, setSearchTerm] = useState(null);
   let [ratingValue, setRatingValue] = useState({ min: 0, max: 10 });
+  let [year, setYear] = useState({ min: 1980, max: 2020 });
   // let [modal, setModal] = useState(false);
 
   const CurrentPlaying = async (page) => {
@@ -35,10 +36,11 @@ export default function App() {
     let result = await fetch(url)
     let data = await result.json()
     console.log("api ok?", data)
-    setMoviePage(data)
+    // setMoviePage(data)
     setMovieList(data.results)
     setMovies(data.results) // data from results pass to movies >> setMovies
     setRatingValue({ min: 0, max: 10 });
+    setYear({ min: 1980, max: 2020 });
   }
 
   // let openModal = async (movieID) => {
@@ -100,15 +102,15 @@ export default function App() {
   // }
   const searchByKeyword = async () => {
     setActivePage(1);
-    setUpcomingList(null)
+    // setUpcomingList(null)
     let keyword = document.getElementById("keyword").value
     let url = `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&language=en-US&page=1&include_adult=false&query=${keyword}`
     let result = await fetch(url)
     let data = await result.json()
     // console.log("search ok?", data)
     // searchList = data.results
-    setSearchList(data.results)
-    setMoviePage(data);
+    // setSearchList(data.results)
+    // setMoviePage(data);
     setMovies(data.results)
   }
 
@@ -122,17 +124,31 @@ export default function App() {
     });
     console.log('filtered Movies:', filteredMovies)
     setMovies(filteredMovies);
+    // setRatingValue(filteredMovies)
   }
+
+  let yearSliderChange = (newValue) => {
+    setYear(newValue);
+    console.log('year:', year);
+    console.log('movieList:', movieList)
+    // console.log('value.min & max', ratingValue.value.min, ratingValue.value.max)
+    let filteredMovies = movies.filter(movie => {
+      return movie.release_date.split('-')[0] >= year.min && movie.release_date.split('-')[0] <= year.max;
+    });
+    console.log('filtered Movies:', filteredMovies)
+    setMovies(filteredMovies);
+  }
+
 
   const upcomingMovie = async () => {
     // setActivePage(1);
-    setSearchList(null)
+    // setSearchList(null)
     let url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apikey}&language=en-US&page=1`
     let result = await fetch(url)
     let data = await result.json()
     console.log("***api ok?", data)
     setMovieList(data.results)
-    setMoviePage(data)
+    // setMoviePage(data)
     setMovies(data.results)
   }
 
@@ -193,12 +209,24 @@ export default function App() {
         <div className="row main-zone border-red">
 
           <div className="range col-md-5 col-sm-12 mx-md-auto my-5 container-fluid text-white">
-            <InputRange className="rating-bar"
-              maxValue={10}
-              minValue={0}
-              value={ratingValue}
-              onChange={(value) => ratingSliderChange(value)} />
-            <p className="text-center"> ★ Rating</p>
+            <div>
+              <InputRange className="rating-bar"
+                maxValue={10}
+                minValue={0}
+                value={ratingValue}
+                onChange={(value) => ratingSliderChange(value)} />
+              <p className="text-center"> ★ Rating</p>
+            </div>
+            <div>
+              <InputRange className="year-bar"
+                maxValue={2020}
+                minValue={1980}
+                value={year}
+                onChange={(value) => yearSliderChange(value)} />
+              <p className="text-center"> ✓ Year</p>
+            </div>
+
+
           </div>
 
           <div className="row list-area border-red">
