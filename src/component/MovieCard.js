@@ -47,8 +47,9 @@ export default function MovieCard(props) {
                             <h6 class="card-text card-letter">   ★ {props.rating}</h6>
                         </div>
                         <h6 class="card-text card-letter">
-                            {props.genre.map((genre) => { 
-                                return (<Badge variant="dark" style={{ marginRight: "10px" }}>{props.genres.find((item) => item.id === genre).name}</Badge>) })}</h6>
+                            {props.genre.map((genre) => {
+                                return (<Badge variant="dark" style={{ marginRight: "10px" }}>{props.genres.find((item) => item.id === genre).name}</Badge>)
+                            })}</h6>
                         {/* <div className="detail-info">
                             <p>{props.overview} </p>
                         </div> */}
