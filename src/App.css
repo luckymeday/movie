@@ -15,6 +15,7 @@ border:1px solid red
   color:#e6dfdf;
   font-family: 'Times New Roman', Times, serif;
   padding-bottom: 15px;
+  font-style: italic;
 }
 
 .navbar-main {
@@ -51,10 +52,6 @@ background-color:#e6dfdf;
   width:80%;
 }
 
-/* .search-area{
-  width:80%;
-} */
-
 .moviecard{
 border: 5px solid #817a7a;
 border-radius: 20px;
@@ -82,13 +79,25 @@ height: 100%;
   overflow: scroll;
   height: 100%;
   width: 100%;
-opacity: 85%;
-background-color: #494747;
+  opacity: 85%;
+  background-color: #494747;
   color: white;
- position: absolute;
- top: 50%;
+  position: absolute;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.bars{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.dropdown {
+  margin-bottom: 15px;
+  /* background-color: none !important; */
+  color: #e6dfdf !important;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: larger;
 }
 
 .card-letter{
@@ -109,10 +118,6 @@ background-color: #494747;
   display: flex;
   justify-content: space-around;
 }
-
-/* .upcoming-area{
-  width:80%;
-} */
 
 .pagination {
   text-align: center;
@@ -176,7 +181,7 @@ header .overlay {
 
 @media (pointer: coarse) and (hover: none) {
   header {
-    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+    background: url('https://wallpapercave.com/wp/2TrmmSi.jpg') black no-repeat center center scroll;
   }
   header video {
     display: none;

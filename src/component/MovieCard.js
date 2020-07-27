@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-// import { Row } from 'react-bootstrap'
+import { Badge } from 'react-bootstrap'
 
 // how to define props, how to use props variable in this component 
 // how to send value of variable from here to parents? - by props
 export default function MovieCard(props) {
+    console.log("what props?", props)
     let [isHover, setIsHover] = useState(false)
     // const [show, setShow] = useState(false)
     console.log('props.overview:', props.overview)
@@ -27,6 +28,7 @@ export default function MovieCard(props) {
                             <h6 class="card-text card-letter">{props.releaseDate}</h6>
                             <h6 class="card-text card-letter">   ★ {props.rating}</h6>
                         </div>
+                        <h6 class="card-text card-letter">{props.genre.map((genre) => { return (<Badge variant="dark" style={{ marginRight: "10px" }}>{props.genres.find((item) => item.id === genre).name}</Badge>) })}</h6>
                         <hr></hr>
                         {props.overview}
                     </div>
@@ -44,6 +46,9 @@ export default function MovieCard(props) {
                             <h6 class="card-text card-letter">{props.releaseDate}</h6>
                             <h6 class="card-text card-letter">   ★ {props.rating}</h6>
                         </div>
+                        <h6 class="card-text card-letter">
+                            {props.genre.map((genre) => { 
+                                return (<Badge variant="dark" style={{ marginRight: "10px" }}>{props.genres.find((item) => item.id === genre).name}</Badge>) })}</h6>
                         {/* <div className="detail-info">
                             <p>{props.overview} </p>
                         </div> */}

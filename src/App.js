@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react' // always set state
 import MovieCard from './component/MovieCard'
 // import SearchCard from './component/SearchCard'
 // import UpcomingCard from './component/UpcomingCard';
+// import Header from './component/UpcomingCard';
 import Pagination from "react-js-pagination";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Form, FormControl, Nav } from 'react-bootstrap';
-// import { Jumbotron, Container } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Button, Dropdown } from 'react-bootstrap';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
+import 'react-dropdown/style.css';
 import video from "./component/cine.mp4";
-// import ReactModal from 'react-modal';
+
 import './App.css'
 
 const apikey = process.env.REACT_APP_APIKEY
@@ -24,6 +25,7 @@ export default function App() {
   // let [moviePage, setMoviePage] = useState({});
   let [activePage, setActivePage] = useState(1);
   // let [searchTerm, setSearchTerm] = useState(null);
+  let [genres, setGenres] = useState(null);
   let [ratingValue, setRatingValue] = useState({ min: 0, max: 10 });
   let [year, setYear] = useState({ min: 1980, max: 2020 });
   // let [modal, setModal] = useState(false);
@@ -43,27 +45,6 @@ export default function App() {
     setYear({ min: 1980, max: 2020 });
   }
 
-  // let openModal = async (movieID) => {
-  //   let url = `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${apikey}&language=en-US`;
-  //   let result = await fetch(url);
-  //   let data = await result.json();
-  //   setModal(true);
-  // }
-
-  // PAGINATION code not working 
-  // const handlePageChange = async (pageNumber) => {
-  //   setActivePage(pageNumber);
-  //   let url = ''
-  //   if (searchTerm) {
-  //     url = `https://api.themoviedb.org/3/search/movie?query=${searchTerm}&api_key=${apikey}&language=en-US&page=${pageNumber}`
-  //   }
-  //   // else (upcomingList) {
-  //   //   url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apikey}&language=en-US&page=${pageNumber}`
-  //   // }
-  //   let result = await fetch(url)
-  //   let data = await result.json()
-  //   setMovies(data.results)
-  // }
   const handlePageChange = (pageNumber) => {
     console.log('*--- handlePageChange: ---*')
     console.log('pageNumber:', pageNumber)
@@ -73,7 +54,7 @@ export default function App() {
 
   // similar to componentDidMount and componentDidupdate
   useEffect(() => {
-    CurrentPlaying(1)
+    getGenres()
   }, [])
 
   if (movies === null) {
@@ -82,24 +63,6 @@ export default function App() {
     </div>
   }
 
-  // SEARCH code not working
-  // const searchByKeyword = async (keyword) => {
-  //   setActivePage(1);
-  //   setSearchTerm(keyword);
-  //   setUpcomingList(null)
-  //   if (keyword === '') {
-  //     setMovies(movieList);
-  //   } else {
-  //     setMovies(movies.filter((movie) => movie.title.toLowerCase().includes(keyword.toLowerCase())));
-  //     let url = `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&language=en-US&page=1&include_adult=false&query=${keyword}`
-  //     let result = await fetch(url)
-  //     let data = await result.json()
-  //     // console.log("search ok?", data)
-  //     // searchList = data.results
-  //     setMoviePage(data);
-  //     setMovies(data.results);
-  //   }
-  // }
   const searchByKeyword = async () => {
     setActivePage(1);
     // setUpcomingList(null)
@@ -112,6 +75,15 @@ export default function App() {
     // setSearchList(data.results)
     // setMoviePage(data);
     setMovies(data.results)
+  }
+
+  const getGenres = async () => {
+    let url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apikey}&language=en-US`
+    let result = await fetch(url)
+    let data = await result.json()
+    setGenres(data.genres)
+    // setMovies(data.results)
+    CurrentPlaying(activePage)
   }
 
   let ratingSliderChange = (newValue) => {
@@ -139,6 +111,23 @@ export default function App() {
     setMovies(filteredMovies);
   }
 
+  const sortByRate = (direction) => {
+    let sortedList;
+    if (direction === "asc") {
+      sortedList = movies.sort((a, b) => a.vote_average - b.vote_average);
+    } else {
+      sortedList = movies.sort((a, b) => b.vote_average - a.vote_average);
+    } setMovies([...sortedList])
+  }
+
+  const sortByPupular = (direction) => {
+    let sortedList;
+    if (direction === "asc") {
+      sortedList = movies.sort((a, b) => a.popularity - b.popularity);
+    } else {
+      sortedList = movies.sort((a, b) => b.popularity - a.popularity);
+    } setMovies([...sortedList])
+  }
 
   const upcomingMovie = async () => {
     // setActivePage(1);
@@ -147,6 +136,18 @@ export default function App() {
     let result = await fetch(url)
     let data = await result.json()
     console.log("***api ok?", data)
+    setMovieList(data.results)
+    // setMoviePage(data)
+    setMovies(data.results)
+  }
+
+  const topratedMovie = async () => {
+    // setActivePage(1);
+    // setSearchList(null)
+    let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&language=en-US&page=1`
+    let result = await fetch(url)
+    let data = await result.json()
+    // console.log("***api ok?", data)
     setMovieList(data.results)
     // setMoviePage(data)
     setMovies(data.results)
@@ -162,7 +163,8 @@ export default function App() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="index.html" className="color-me">Now Showing</Nav.Link>
-            <Nav.Link href="#link" className="color-me" onClick={() => upcomingMovie()}>Upcoimg Movies</Nav.Link>
+            <Nav.Link href="#link" className="color-me" onClick={() => upcomingMovie()}>Upcoming</Nav.Link>
+            <Nav.Link href="#link" className="color-me" onClick={() => topratedMovie()}>Top Rated</Nav.Link>
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search for a Movie" id="keyword" className="mr-sm-2" />
@@ -171,91 +173,45 @@ export default function App() {
         </Navbar.Collapse>
       </Navbar>
 
-      {/* <Jumbotron fluid className="bground">
-        <Container>
-          <div class="overlay">
-            <div className="video-container">
-              <video src={video} playsinline="playsinline" preload="true" autoPlay="autoplay" width="1080" loop="loop" volume="1" />
-            </div></div>
-        </Container>
-      </Jumbotron> */}
-      {/* 
-      <div className="header-container">
-        <div className="video-container">
-          <div className="video-container">
-            <video src={video} preload="true" autoPlay="autoplay" width="1200" loop="loop" volume="1" />
-          </div>
-        </div>
-      </div> */}
       <header>
         <div className="overlay"></div>
         <video src={video} preload="true" autoPlay="autoplay" loop="loop" volume="1" laysinline="playsinline" />
-        {/* <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-          <source src="cine.mp4" type="video/mp4" /></video> */}
-        {/* <div className="container h-100">
-          <div className="d-flex h-100 text-center align-items-center">
-            <div className="w-100 text-white">
-              <h1 className="display-3">Cinama Paradiso</h1>
-              <p className="lead mb-0">Cinama Paradiso</p>
-            </div>
-          </div>
-        </div> */}
       </header>
 
       <section class="my-5">
-        {/* <div class="container"> */}
-        {/* <div class="row"> */}
-        {/* <div class="col-md-8 mx-auto"> */}
         <div className="row main-zone border-red">
-
           <div className="range col-md-5 col-sm-12 mx-md-auto my-5 container-fluid text-white">
-            <div>
-              <InputRange className="rating-bar"
-                maxValue={10}
-                minValue={0}
-                value={ratingValue}
-                onChange={(value) => ratingSliderChange(value)} />
-              <p className="text-center"> ★ Rating</p>
-            </div>
-            <div>
-              <InputRange className="year-bar"
-                maxValue={2020}
-                minValue={1980}
-                value={year}
-                onChange={(value) => yearSliderChange(value)} />
-              <p className="text-center"> ✓ Year</p>
-            </div>
-
-
+            <Dropdown className="text-center">
+              <Dropdown.Toggle variant="link" className="dropdown" id="dropdown-basic">
+                See by Rating or Popularity</Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1" onClick={() => sortByRate("dsc")}>Rating(high to low)</Dropdown.Item>
+                <Dropdown.Item href="#/action-2" onClick={() => sortByRate("asc")}>Rating(low to high)</Dropdown.Item>
+                <Dropdown.Item href="#/action-3" onClick={() => sortByPupular("dsc")}>Popularity(high to low)</Dropdown.Item>
+                <Dropdown.Item href="#/action-4" onClick={() => sortByPupular("asc")}>Popularity(low to high)</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <InputRange className="rating-bar"
+              maxValue={10}
+              minValue={0}
+              value={ratingValue}
+              onChange={(value) => ratingSliderChange(value)} />
+            <p className="text-center bars"> ★ Rating</p>
+            <InputRange className="year-bar"
+              maxValue={2020}
+              minValue={1980}
+              value={year}
+              onChange={(value) => yearSliderChange(value)} />
+            <p className="text-center bars"> ✓ Year</p>
           </div>
-
+          
           <div className="row list-area border-red">
             {movies.map(item => {
+              console.log('item:', item)
               return (
-                <MovieCard image={item.poster_path} title={item.original_title} releaseDate={item.release_date} rating={item.vote_average} overview={item.overview} />
-              )
+                <MovieCard image={item.poster_path} title={item.original_title} releaseDate={item.release_date} rating={item.vote_average} overview={item.overview} genre={item.genre_ids} genres={genres} />)
             })}
-            {/* <div className="text-white d-flex justify-content-center mt-5">
-              <ReactModal
-                isOpen={modal}
-                style={{ overlay: { display: "flex", justifyContent: "center", backgroundClip: "green" }, content: { width: "70%", height: "70%", position: "relative", margin: "auto" } }}
-                onRequestClose={() => setModal(false)}>
-              </ReactModal></div> */}
-
-            {/* <div className="row search-area border-red">
-              {searchList.map(item => {
-                return (
-                  <SearchCard image={item.poster_path} title={item.original_title} releaseDate={item.release_date} />
-                )
-              })}</div> */}
-            {/* <div className="row upcoming-area border-red">
-              {upcomingList.map(item => {
-                return (
-                  <UpcomingCard image={item.poster_path} title={item.original_title} releaseDate={item.release_date} />
-                )
-              })} </div> */}
           </div>
-
           <div className="pagination border-red">
             <Pagination
               activePage={activePage}
@@ -267,15 +223,11 @@ export default function App() {
               linkClass="page-link" />
           </div>
         </div>
-        {/* </div>
-        </div> */}
       </section>
 
       <footer className="footer text-center">
-        Cinema Paradiso built by JEESUN
+        <p>Cinema Paradiso built by JEESUN</p>
       </footer>
-
-
     </div >
   )
 }
