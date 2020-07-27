@@ -242,6 +242,12 @@ export default function App() {
         {/* </div>
         </div> */}
       </section>
+
+      <footer className="footer text-center">
+        Cinema Paradiso built by JEESUN
+      </footer>
+
+
     </div >
   )
 }
