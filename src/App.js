@@ -23,7 +23,7 @@ export default function App() {
   let [searchList, setSearchList] = useState([])
   let [moviePage, setMoviePage] = useState({});
   let [activePage, setActivePage] = useState(1);
-  let [searchTerm, setSearchTerm] = useState(null);
+  // let [searchTerm, setSearchTerm] = useState(null);
   let [ratingValue, setRatingValue] = useState({ min: 0, max: 10 });
   // let [modal, setModal] = useState(false);
 

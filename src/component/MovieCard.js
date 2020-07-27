@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Row } from 'react-bootstrap'
+// import { Row } from 'react-bootstrap'
 
 // how to define props, how to use props variable in this component 
 // how to send value of variable from here to parents? - by props
