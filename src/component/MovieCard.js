@@ -29,10 +29,9 @@ export default function MovieCard(props) {
         if (data.videos.results.length > 0) {
             setYoutubeLink(`https://www.youtube.com/embed/${data.videos.results[0].key}`)
         }
+        setShow(true)
     }
-    useEffect(() => {
-        callApiGetVideo()
-    }, [])
+
 
     if (isHover) {
         return (
@@ -55,7 +54,7 @@ export default function MovieCard(props) {
                     </Modal.Body>
                 </Modal >
                 <div className="col-md-3">
-                    <div className="card moviecard container" onMouseOver={showInfo} onMouseLeave={hideInfo} onClick={() => setShow(true)}>
+                    <div className="card moviecard container" onMouseOver={showInfo} onMouseLeave={hideInfo} onClick={() => callApiGetVideo()}>
                         <img src={fullImg} className="card-img-top" alt="..." />
                         <div className="detail-info"><h5 className="card-title card-letter">{props.title}</h5>
                             <div className="small-letter">
@@ -91,7 +90,7 @@ export default function MovieCard(props) {
                     </Modal.Body>
                 </Modal>
                 <div className="col-md-3">
-                    <div className="card moviecard" onMouseOver={showInfo} onMouseLeave={hideInfo} onClick={() => setShow(true)}>
+                    <div className="card moviecard" onMouseOver={showInfo} onMouseLeave={hideInfo} onClick={() => callApiGetVideo()}>
                         <img src={fullImg} className="card-img-top" alt="..." />
                         <div className="card-body">
                             <h5 className="card-title card-letter">{props.title}</h5>
