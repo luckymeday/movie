@@ -5,12 +5,12 @@ import Modal from 'react-bootstrap/Modal'
 // how to define props, how to use props variable in this component 
 // how to send value of variable from here to parents? - by props
 export default function MovieCard(props) {
-    console.log("what props?", props)
+    // console.log("what props?", props)
     let [isHover, setIsHover] = useState(false)
     let [youtubeLink, setYoutubeLink] = useState(null)
     const [show, setShow] = useState(false);
     // const [show, setShow] = useState(false)
-    console.log('props.overview:', props.overview)
+    // console.log('props.overview:', props.overview)
     // console.log("props ok?", props)
     let fullImg = `https://image.tmdb.org/t/p/original/${props.image}`
     const showInfo = () => {
@@ -21,9 +21,10 @@ export default function MovieCard(props) {
     }
 
     const callApiGetVideo = async () => {
+        console.log('callApiGetVideo.props.movieID: ', props.movieID)
         let url = `https://api.themoviedb.org/3/movie/${props.movieID}?api_key=c406fd865c79fa2bbc5718f61b988fcf&language=en-US&append_to_response=videos`
-        let respone = await fetch(url)
-        let data = await respone.json()
+        let result = await fetch(url)
+        let data = await result.json()
         console.log('data:', data)
         if (data.videos.results.length > 0) {
             setYoutubeLink(`https://www.youtube.com/embed/${data.videos.results[0].key}`)

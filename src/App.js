@@ -91,7 +91,7 @@ export default function App() {
     console.log('rating value:', ratingValue);
     console.log('movieList:', movieList)
     // console.log('value.min & max', ratingValue.value.min, ratingValue.value.max)
-    let filteredMovies = movies.filter(movie => {
+    let filteredMovies = movieList.filter(movie => {
       return movie.vote_average >= ratingValue.min && movie.vote_average <= ratingValue.max;
     });
     console.log('filtered Movies:', filteredMovies)
@@ -104,7 +104,7 @@ export default function App() {
     console.log('year:', year);
     console.log('movieList:', movieList)
     // console.log('value.min & max', ratingValue.value.min, ratingValue.value.max)
-    let filteredMovies = movies.filter(movie => {
+    let filteredMovies = movieList.filter(movie => {
       return movie.release_date.split('-')[0] >= year.min && movie.release_date.split('-')[0] <= year.max;
     });
     console.log('filtered Movies:', filteredMovies)
